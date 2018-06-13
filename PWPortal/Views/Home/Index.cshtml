@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Home Index";
+}
+
+<div class="modal-dialog">
+    <fieldset>
+        <legend>Home</legend>
+        <div class="col-md-12">
+            @Html.ActionLink("UserModule", "Index", "UserManagement", new { area = "User" }, null)
+        </div>
+        <div class="col-md-12">
+            @Html.ActionLink("ReportModule", "Index", "ReportManagement", new { area = "Report" }, null)
+        </div>
+    </fieldset>
+</div>

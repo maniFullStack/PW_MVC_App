@@ -1,0 +1,41 @@
+﻿@model List<PWPortal.Areas.User.Models.UserModel>
+@using Resources = SharedClass.Resources
+
+@using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "userView" }))
+{
+    <div class="modal-dialog">
+        <fieldset>
+            <legend>Users List</legend>
+            <div class="row form-group div_rptPadding">
+                <h1 class="col-md-3 float_lft rpt_Icon"><i class="fa fa-users"></i></h1>
+                <div class="col-md-6 align_center padding_top"></div>
+                <div class="col-md-3 padding_top">@Ajax.ActionLink("Add New", "AddUser", "UserManagement", new { area = "User"}, new AjaxOptions { UpdateTargetId = "userView" })</div>
+            </div>
+            <div id="userListDiv" class="row form-group div_rptPadding">
+                <table id="tblUsersLst" class="display">
+                    <thead>
+                        <tr>
+                            <th>@Resources.UserResource.th_UserID</th>
+                            <th>@Resources.UserResource.th_FullName</th>
+                            <th>@Resources.UserResource.th_Email</th>
+                            <th>@Resources.UserResource.th_Group</th>
+                            <th>@Resources.UserResource.th_Status</th>
+                            <th>@Resources.UserResource.th_LastLogin</th>
+                            <th>@Resources.UserResource.th_Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </fieldset>
+    </div>
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+        //Load Users list      
+        LoadUsersTable('@Url.Action("GetUsersList", "UserManagement", new { area = "User" })');
+    });
+</script>
+

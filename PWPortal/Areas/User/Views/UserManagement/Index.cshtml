@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<article id="userView"></article>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#userView").load('@Html.Raw(Url.Action("UsersList", "UserManagement"))');
+        });
+    </script>
+}
+
+
+
+
+

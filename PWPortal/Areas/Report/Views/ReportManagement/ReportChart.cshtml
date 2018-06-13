@@ -1,0 +1,293 @@
+﻿@model PWPortal.Areas.Report.Models.ReportChartModel
+@using Resources = SharedClass.Resources
+
+@using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "reportView" }))
+{
+    <div class="modal-dialog">
+        <fieldset>
+            <legend>Charts</legend>
+            <div class="row form-group div_rptPadding">
+                <h1 class="col-md-3 float_lft rpt_Icon"><i class="fa fa-file-pdf-o"></i></h1>
+            </div>
+            <div class="well well-sm">
+                <div id="chart-container" class="row form-group div_rptPadding">
+                    <canvas id="rptChart"></canvas>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Load report chart
+        LoadReportChart("GESS");
+    });
+
+
+    //Load Chart with Report
+    function LoadReportChart(reportType) {
+        $.ajax({
+            type: "Post",
+            url: "/ReportManagement/GetChartData?reportType=" + reportType,
+            dataType: "Json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                debugger;
+
+                if (data == null) {
+                    $("#reportView").load('/Report/ReportManagement/ReportDisplay');
+                }
+                else {
+                    debugger;
+                    var resultData = data;
+                    var ctx = document.getElementById("rptChart").getContext('2d');
+                    var month = [];
+                    var d1 = [];
+                    var d2 = [];
+                    var d3 = [];
+                    var d4 = [];
+                    var d5 = [];
+
+                    ctx.canvas.height = '615px';
+
+                    if (resultData.FieldType == '5') {
+                        for (var i in resultData.ChartDataList) {
+                            if (typeof resultData.ChartDataList[i].ReportMonth !== "undefined") {
+                                month.push(resultData.ChartDataList[i].ReportMonth);
+
+                                d1.push(resultData.ChartDataList[i].Data1);
+                                d2.push(resultData.ChartDataList[i].Data2);
+                                d3.push(resultData.ChartDataList[i].Data3);
+                                d4.push(resultData.ChartDataList[i].Data4);
+                                d5.push(resultData.ChartDataList[i].Data5);
+                            }
+                        }
+
+                        chartData = [
+                             {
+                                 label: 'Very dissatisfied',
+                                 backgroundColor: 'rgba(229, 221, 0, 0.2)',
+                                 borderColor: 'rgba(229, 221, 0, 1)',
+                                 borderWidth: 1,
+                                 data: d1
+                             },
+                             {
+                                 label: 'SomeWhat dissatisfied',
+                                 backgroundColor:
+                                     'rgba(140, 179, 2, 0.2)',
+                                 borderColor:
+                                     'rgba(140, 179, 2, 1)',
+                                 borderWidth: 1,
+                                 data: d2
+                             },
+                             {
+                                 label: 'SomeWhat satisfied',
+                                 backgroundColor:
+                                     'rgba(0, 139, 116, 0.2)',
+                                 borderColor:
+                                     'rgba(0, 139, 116, 1)',
+                                 borderWidth: 1,
+                                 data: d3
+                             },
+                             {
+                                 label: 'Very satisfied',
+                                 backgroundColor:
+                                     'rgba(0, 76, 102, 0.2)',
+                                 borderColor:
+                                     'rgba(0, 76, 102, 1)',
+                                 borderWidth: 1,
+                                 data: d4
+                             },
+                             {
+                                 label: 'NA',
+                                 backgroundColor:
+                                     'rgba(51, 43, 64, 0.2)',
+                                 borderColor:
+                                     'rgba(51, 43, 64, 1)',
+                                 borderWidth: 1,
+                                 data: d5
+                             }
+                        ];
+                    }
+
+                    if (resultData.FieldType == '3') {
+                        for (var i in resultData.ChartDataList) {
+                            if (typeof resultData.ChartDataList[i].ReportMonth !== "undefined") {
+                                month.push(resultData.ChartDataList[i].ReportMonth);
+
+                                d1.push(resultData.ChartDataList[i].Data1);
+                                d2.push(resultData.ChartDataList[i].Data2);
+                                d3.push(resultData.ChartDataList[i].Data3);
+                            }
+                        }
+                       
+                        chartData = [
+                        {
+                            label: 'Yes',
+                            backgroundColor: 'rgba(229, 221, 0, 0.2)',
+                            borderColor: 'rgba(229, 221, 0, 1)',
+                            borderWidth: 1,
+                            data: d1
+                        },
+                        {
+                            label: 'No',
+                            backgroundColor:
+                                    'rgba(140, 179, 2, 0.2)',
+                            borderColor:
+                                'rgba(140, 179, 2, 1)',
+                            borderWidth: 1,
+                            data: d2
+                        },
+                        {
+                            label: 'N/A',
+                            backgroundColor:
+                                'rgba(0, 139, 116, 0.2)',
+                            borderColor:
+                                'rgba(0, 139, 116, 1)',
+                            borderWidth: 1,
+                            data: d3
+                        }
+                        ];
+                    }
+
+                    if (resultData.FieldType == '2') {
+                        for (var i in resultData.ChartDataList) {
+                            if (typeof resultData.ChartDataList[i].ReportMonth !== "undefined") {
+                                month.push(resultData.ChartDataList[i].ReportMonth);
+
+                                d1.push(resultData.ChartDataList[i].Data1);
+                                d2.push(resultData.ChartDataList[i].Data2);
+                            }
+                        }
+                        chartData = [
+                           {
+                               label: 'Yes',
+                               backgroundColor: 'rgba(229, 221, 0, 0.2)',
+                               borderColor: 'rgba(229, 221, 0, 1)',
+                               borderWidth: 1,
+                               data: d1
+                           },
+                           {
+                               label: 'No',
+                               backgroundColor:
+                                    'rgba(140, 179, 2, 0.2)',
+                               borderColor:
+                                   'rgba(140, 179, 2, 1)',
+                               borderWidth: 1,
+                               data: d2
+                           }
+                        ];
+                    }
+
+                    if (resultData.FieldType == '1') {
+                        for (var i in resultData.ChartDataList) {
+                            if (typeof resultData.ChartDataList[i].ReportMonth !== "undefined") {
+                                month.push(resultData.ChartDataList[i].ReportMonth);
+
+                                d1.push(resultData.ChartDataList[i].Data1);
+                            }
+                        }
+                        chartData = [
+                           {
+                               label: 'Response',
+                               backgroundColor: 'rgba(229, 221, 0, 0.2)',
+                               borderColor: 'rgba(229, 221, 0, 1)',
+                               borderWidth: 1,
+                               data: d1
+                           }
+                        ];
+                    }
+
+
+                    var rptChart = new Chart(ctx, {
+                        type: 'horizontalBar',
+                        data: {
+                            labels: month,
+                            datasets: chartData
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        fontColor: "#486ca3"
+                                    },
+                                    gridLines: {
+                                        display: false
+                                    },
+                                    barPercentage: 0.5,
+                                    stacked: true
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        fontColor: "#486ca3",
+                                        min: 0,
+                                        max: 100,
+                                        stepSize: 10
+                                    },
+                                    stacked: true
+                                }]
+                            },
+                            animation: {
+                                onComplete: function () {
+                                    var chartInstance = this.chart;
+                                    var ctx = chartInstance.ctx;
+                                    ctx.textAlign = "right";
+                                    ctx.font = "11px Open Sans";
+                                    ctx.fillStyle = "#486ca3";
+
+                                    Chart.helpers.each(this.data.datasets.forEach(function (dataset, i) {
+
+                                        var meta = chartInstance.controller.getDatasetMeta(i);
+                                        Chart.helpers.each(meta.data.forEach(function (bar, index) {
+                                            data = dataset.data[index];
+                                            if (data >= 3) {
+                                                ctx.fillText(data, bar._model.x - 25, bar._model.y + 4);
+                                            }
+                                        }), this)
+
+                                    }), this);
+                                }
+                            },
+                            legend: {
+                                labels: {
+                                    fontColor: '#486ca3'
+                                },
+                                position: 'bottom'
+                            },
+                            tooltips: {
+                                mode: 'label',
+                                callbacks: {
+                                    label: function (tooltipItem, data) {
+                                        var lbl = data.datasets[tooltipItem.datasetIndex].label;
+                                        var rslt = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                                        var total = 0;
+                                        if (data.datasets.length >= 5) {
+                                            for (var i = 0; i < 3; i++)
+                                                total += parseInt(data.datasets[i].data[tooltipItem.index]);
+
+                                            if (tooltipItem.datasetIndex != data.datasets.length - 1) {
+                                                return lbl + "% : " + rslt;
+                                            } else {
+                                                return [lbl + "% : " + rslt, "T3B% : " + total];
+                                            }
+                                        }
+                                        else {
+                                            return lbl + "% : " + rslt;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                }
+            },
+            error: function (err) {
+                debugger;
+                alert("err:" + err);
+            }
+        });
+    }
+</script>

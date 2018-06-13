@@ -1,0 +1,38 @@
+﻿@model PWPortal.Areas.Account.Models.LoginModel
+
+@using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "loginView", HttpMethod = "POST", InsertionMode= InsertionMode.Replace }))
+{
+    @Html.ValidationSummary()
+    <div class="modal-dialog">
+        <fieldset>
+            <legend>Account Login</legend>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.userName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(m => m.userName)
+                        @Html.ValidationMessageFor(m => m.userName)
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.password)
+                    </div>
+                    <div class="editor-field">
+                        @Html.PasswordFor(m => m.password)
+                        @Html.ValidationMessageFor(m => m.password)
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-6">
+                    <input type="submit" class="btn btn-default" value="Login" />
+                    @Ajax.ActionLink("Reset Password", "ResetPassword", "Login", new { area = "Account" }, new AjaxOptions { UpdateTargetId = "loginView" }, new { @class = "btn btn-normal" })
+                    @*<input type="button" class="btn btn-normal" value="Reset Password" onclick="location.href='@Url.Action("ResetPassword", "Login", new { area="Account"})'" />*@
+                </div>
+            </div>
+        </fieldset>
+    </div>
+}

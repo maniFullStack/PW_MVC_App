@@ -1,0 +1,81 @@
+﻿@model PWPortal.Areas.User.Models.EditUserModel
+
+@using(Ajax.BeginForm("EditUser", "UserManagement", new { area = "User", id ="EditUserForm" }, new AjaxOptions{UpdateTargetId="userView"}))
+{
+    <div class="modal-dialog">
+        <fieldset>
+            <legend>Edit User</legend>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.FirstName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(m => m.FirstName)
+                        @Html.ValidationMessageFor(m => m.FirstName)
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.LastName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(m => m.LastName)
+                        @Html.ValidationMessageFor(m => m.LastName)
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.Email)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(m => m.Email)
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.Phone)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(m => m.Phone)
+                        @Html.ValidationMessageFor(m => m.Phone)
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.selectedGroupId)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(m => m.selectedGroupId, new SelectList(Model.groupList, "Value", "Text", Model.selectedGroupId))
+                        @Html.ValidationMessageFor(m => m.selectedGroupId)
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.SeletedStatusId)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(m => m.SeletedStatusId, new SelectList(Model.statusList, "Value", "Text", Model.SeletedStatusId))
+                        @Html.ValidationMessageFor(m => m.SeletedStatusId)
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    @Html.HiddenFor(m => m.UserId)
+                </div>
+                <div class="col-md-12">
+                    <input type="submit" id="editUserSubmit" class="btn btn-default" value="Update" />
+                    @Ajax.ActionLink("Reset Password", "ResetPassword", "Login", new { area = "Account", @class = "btn btn-normal" }, new AjaxOptions { UpdateTargetId = "loginView" })
+                </div>
+                <br />
+            </div>
+        </fieldset>
+    </div>
+}
+

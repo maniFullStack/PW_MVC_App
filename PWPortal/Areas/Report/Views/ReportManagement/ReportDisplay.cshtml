@@ -1,0 +1,47 @@
+﻿@model PWPortal.Areas.Report.Models.ReportDisplayModel
+@using Resources = SharedClass.Resources
+
+@using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "reportView" }))
+{
+    <div class="modal-dialog">
+        <fieldset>
+            <legend>Reports</legend>
+            <div class="row form-group div_rptPadding">
+                <h1 class="col-md-3 float_lft rpt_Icon"><i class="fa fa-file-pdf-o"></i></h1>
+                <div class="col-md-6 align_center padding_top">
+                    <label class="filter_lbl">From:&nbsp;<input type="text" class="form-control date_txt" id="fromDate" /></label>
+                    <label class="title_row_width">To: &nbsp;<input type="text" class="form-control date_txt" id="toDate" /></label>
+                    <label class="title_row_width">&nbsp;<input type="button" id="btn_filter" value="Filter" class="btn btn-default" onclick="FilterReport()" /></label>
+                </div>
+                <div class="col-md-3 padding_top">
+                    <input type="button" id="btnRawDataExport" class="btn btn-default" onclick="btnRawDataExport_Click" value="RawDataExport" />
+                    &nbsp;
+                    <input type="button" id="btnExport" class="btn btn-default btn_Export" onclick="btnExport_Click" value="Export" />                   
+                </div>
+            </div>
+            <div id="reportDiv" class="row form-group div_rptPadding">
+                <table id="tblReport" class="display">
+                    <thead>
+                        <tr>
+                            <th>@Resources.ReportResource.th_OrderID</th>
+                            <th>@Resources.ReportResource.th_QnID</th>
+                            <th>@Resources.ReportResource.th_Action</th>
+                            <th>@Resources.ReportResource.th_QnFollowup</th>
+                            <th>@Resources.ReportResource.th_TopResult</th>
+                            <th>@Resources.ReportResource.th_Details</th>
+                            <th>@Resources.ReportResource.th_Size</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </fieldset>
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+        //Load Reports
+        LoadReports('@Html.Raw(Url.Action("GetReports", "ReportManagement", new { area = "Report", @rptType = "9999", @van = "8888", @fromDate = "7777", @toDate = "6666" }))'.replace('9999', '@Model.CurrentReport').replace('8888', '@Model.SelectedVan').replace('7777', '@Model.FromDate').replace('6666', '@Model.ToDate'));
+    });
+</script>

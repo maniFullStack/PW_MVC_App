@@ -1,0 +1,26 @@
+﻿
+
+.btn-default{
+    border:1px solid #000000 !important;
+    background-color: #ff0000 !important;
+    color:#ffffff !important;
+}
+
+.cover-container {   
+    border: 1px solid #000000;
+    border-radius: 10px;
+}
+
+.btn-normal{
+    border:1px solid #000000 !important;
+    background-color:#ffffff !important;
+    color:#ff0000 !important;
+}
+
+.editor-label{
+    float:left;
+}
+
+.display-right{
+    float:right;
+}

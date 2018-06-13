@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";  
+}
+
+<article id="loginView"></article>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+            
+        var id = '@ViewBag.Id';
+        
+        if(id != "")
+        {
+            $("#loginView").load('@Html.Raw(Url.Action("ChangePassword", "Login", new { @id = @ViewBag.Id }))');
+        }
+        else{
+            $("#loginView").load('@Html.Raw(Url.Action("Login", "Login"))');
+        }       
+    });
+</script>
+

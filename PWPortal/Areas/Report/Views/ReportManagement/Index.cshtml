@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<h2>Report Index</h2>
+
+<article id="reportView"></article>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#reportView").load('@Html.Raw(Url.Action("ReportDisplay"))');
+        });
+    </script>
+    }

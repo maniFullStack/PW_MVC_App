@@ -1,0 +1,9 @@
+C:\Development\Govt_Portal\PublicWorksReport\PWPortal\SharedClass\bin\Debug\SharedClass.dll
+C:\Development\Govt_Portal\PublicWorksReport\PWPortal\SharedClass\bin\Debug\SharedClass.pdb
+C:\Development\Govt_Portal\PublicWorksReport\PWPortal\SharedClass\obj\Debug\SharedClass.Resources.AccountResource.resources
+C:\Development\Govt_Portal\PublicWorksReport\PWPortal\SharedClass\obj\Debug\SharedClass.Resources.ReportResource.resources
+C:\Development\Govt_Portal\PublicWorksReport\PWPortal\SharedClass\obj\Debug\SharedClass.Resources.UserResource.resources
+C:\Development\Govt_Portal\PublicWorksReport\PWPortal\SharedClass\obj\Debug\SharedClass.csproj.GenerateResource.Cache
+C:\Development\Govt_Portal\PublicWorksReport\PWPortal\SharedClass\obj\Debug\SharedClass.dll
+C:\Development\Govt_Portal\PublicWorksReport\PWPortal\SharedClass\obj\Debug\SharedClass.pdb
+C:\Development\Govt_Portal\PublicWorksReport\PWPortal\SharedClass\obj\Debug\SharedClass.csprojResolveAssemblyReference.cache

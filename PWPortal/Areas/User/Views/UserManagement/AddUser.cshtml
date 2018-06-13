@@ -1,0 +1,68 @@
+﻿@model PWPortal.Areas.User.Models.AddUserModel
+
+@using (@Ajax.BeginForm("AddUser", "UserManagement", new AjaxOptions { UpdateTargetId = "userView" }))
+{
+    <div class="modal-dialog">
+        <fieldset>
+            <legend>Add New User</legend>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.FirstName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(m => m.FirstName)
+                        @Html.ValidationMessageFor(m => m.FirstName)
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.LastName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(m => m.LastName)
+                        @Html.ValidationMessageFor(m => m.LastName)
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.Email)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(m => m.Email)
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.Phone)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(m => m.Phone)
+                        @Html.ValidationMessageFor(m => m.Phone)
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.selectedGroupId)
+                    </div>
+                    <div class="editor-field">
+
+                        @Html.DropDownListFor(m => m.selectedGroupId, new SelectList(Model.groupList, "Value", "Text", Model.selectedGroupId))
+                        @Html.ValidationMessageFor(m => m.selectedGroupId)
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-default" value="Create" />
+                    @Ajax.ActionLink("Back", "UsersList", "UserManagement", new { area = "User" }, new AjaxOptions { UpdateTargetId = "userView" })
+                </div>
+                <br />
+            </div>
+        </fieldset>
+    </div>
+}
